@@ -5,7 +5,9 @@ let ic = (termObject) => {
     searchResultsDiv += "<h1 style='text-align:center;padding-bottom:10px;'> " + termObject['label']['value'] + "</h1>";
 
     // add map / image
-    searchResultsDiv += "<div id='map-poi'></div>";
+    searchResultsDiv += "<div id='map-poi' style='display: flex;justify-content: center;align-items: center;'>";
+    searchResultsDiv += "<img src='" + termObject['image']['value'] + "' style='max-height:680px;max-width:680px;min-height:300px;min-width:300px;'>";
+    searchResultsDiv += "</div>";
 
     // add Object Data
     searchResultsDiv += '<div id="object_details"></div>';
@@ -17,7 +19,7 @@ let ic = (termObject) => {
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-origin" + "'><li class='list-group-item panel-item'><span class='badge'>" + "origin" + "</span>" + str_origin + "</li></ul>";
     let types = termObject['types']['value'].replaceAll("http://archaeology.link/ontology#", "lado:")
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-type" + "'><li class='list-group-item panel-item'><span class='badge'>" + "type" + "</span>" + types + "</li></ul>";
-    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-identifier" + "'><li class='list-group-item panel-item'><span class='badge'>" + "identifier" + "</span>" + termObject['identifier']['value'] + "</li></ul>";
+    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-identifier" + "'><li class='list-group-item panel-item'><span class='badge'>" + "identifier / HTML" + "</span>ars3do:<a href='https://ars3d.rgzm.de/object.htm?id=ars3do:" + termObject['identifier']['value'] + "' target='_blank'>" + termObject['identifier']['value'] + "</a></li></ul>";
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-update" + "'><li class='list-group-item panel-item'><span class='badge'>" + "last update" + "</span>" + termObject['lastupdate']['value'] + "</li></ul>";
     // add project metadata
     objectdataDetailsDiv += '<h3>Project Data</h3>';
@@ -60,11 +62,4 @@ let ic = (termObject) => {
     $("#objectdata_images").html(objectdataImagesDiv);
     $("#object_details").html(objectdataDetailsDiv);
     $("#object_technicaldata").html(objectdataTechnicalDetailsDiv);
-
-    // load map
-    if (termObject['geom']) {
-        loadMap("map-poi", termObject['geom']['value'].replace("<http://www.opengis.net/def/crs/EPSG/0/4326> ", ""), -1);
-    } else {
-        loadMap("map-poi", "POINT (0 0)", 0);
-    }
 };
