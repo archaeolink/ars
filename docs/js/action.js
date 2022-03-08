@@ -112,7 +112,7 @@ let loadMap = (id, wkt, type) => {
 let loadTerm = () => {
     let query = "null";
     if (findGetParameter("resource").indexOf("ic_") !== -1) {
-        query = "SELECT ?item ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR = ',') AS ?types) ?typ ?identifier ?wikidata ?pleiades ?ancientName ?geom ?lastupdate WHERE { ?item rdf:type ?type. ?item lado:hasType ?typ. ?item rdfs:label ?label. ?item dc:identifier ?identifier. ?item lado:exactMatch ?wikidata. ?item geosparql:hasGeometry ?geom_bn. ?geom_bn geosparql:asWKT ?geom. ?item prov:wasGeneratedBy ?activity_bn. ?activity_bn prov:endedAtTime ?lastupdate. bind('undefined' AS ?pleiades) bind('undefined' AS ?ancientName) OPTIONAL {?item lado:pleiadesID ?pleiades.} OPTIONAL {?item lado:ancientName ?ancientName.} FILTER (?item = samian:" + findGetParameter("resource") + ") } GROUP BY ?item ?label ?identifier ?typ ?wikidata ?pleiades ?ancientName ?geom ?lastupdate";
+        query = "SELECT ?item ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR = ',') AS ?types) ?typ ?identifier ?image ?lastupdate WHERE { ?item rdf:type ?type. ?item lado:hasType ?typ. ?item rdfs:label ?label. ?item dc:identifier ?identifier. ?item lado:hasImage ?image. ?item prov:wasGeneratedBy ?activity_bn. ?activity_bn prov:endedAtTime ?lastupdate. FILTER (?item = ars:" + findGetParameter("resource") + ") } GROUP BY ?item ?label ?identifier ?typ ?image ?lastupdate"
     }
     if (query !== "null") {
         RDF4J.query(query, visData);
