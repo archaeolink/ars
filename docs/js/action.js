@@ -114,6 +114,9 @@ let loadTerm = () => {
     if (findGetParameter("resource").indexOf("ic_") !== -1) {
         query = "SELECT ?item ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR = ',') AS ?types) ?typ ?identifier ?image ?lastupdate WHERE { ?item rdf:type ?type. ?item lado:hasType ?typ. ?item rdfs:label ?label. ?item dc:identifier ?identifier. ?item lado:hasImage ?image. ?item prov:wasGeneratedBy ?activity_bn. ?activity_bn prov:endedAtTime ?lastupdate. FILTER (?item = ars:" + findGetParameter("resource") + ") } GROUP BY ?item ?label ?identifier ?typ ?image ?lastupdate"
     }
+    if (findGetParameter("resource").indexOf("pf_") !== -1) {
+        query = "SELECT ?item ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR = ',') AS ?types) ?typ ?identifier ?image ?lastupdate WHERE { ?item rdf:type ?type. ?item lado:hasType ?typ. ?item rdfs:label ?label. ?item dc:identifier ?identifier. ?item lado:hasImage ?image. ?item prov:wasGeneratedBy ?activity_bn. ?activity_bn prov:endedAtTime ?lastupdate. FILTER (?item = ars:" + findGetParameter("resource") + ") } GROUP BY ?item ?label ?identifier ?typ ?image ?lastupdate LIMIT 1 OFFSET 10"
+    }
     if (query !== "null") {
         RDF4J.query(query, visData);
     } else {
@@ -140,8 +143,10 @@ let visData = (termObject) => {
     if (typeof termObject['item'] === 'undefined') {
         error404();
     } else {
-        if (termObject['item']['value'].indexOf("ic") !== -1) {
+        if (termObject['item']['value'].indexOf("ic_") !== -1) {
             ic(termObject);
+        } else if (termObject['item']['value'].indexOf("pf_") !== -1) {
+            pf(termObject);
         } else {
 
         }

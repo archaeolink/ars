@@ -1,4 +1,4 @@
-let ic = (termObject) => {
+let pf = (termObject) => {
 
     // object
     searchResultsDiv += "<div class='box-resultlist-eighty' id='" + termObject['item']['value'] + "'>";
@@ -18,8 +18,8 @@ let ic = (termObject) => {
     let str_origin = "African Red Slip Ware digital (ARS3D)";
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-origin" + "'><li class='list-group-item panel-item'><span class='badge'>" + "origin" + "</span>" + str_origin + "</li></ul>";
     let types = termObject['types']['value'].replaceAll("http://archaeology.link/ontology#", "lado:")
-    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-type" + "'><li class='list-group-item panel-item'><span class='badge'>" + "type" + "</span>" + types + "</li></ul>";
-    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-identifier" + "'><li class='list-group-item panel-item'><span class='badge'>" + "identifier / HTML" + "</span>ars3do:<a href='https://ars3d.rgzm.de/object.htm?id=ars3do:" + termObject['identifier']['value'] + "' target='_blank'>" + termObject['identifier']['value'] + "</a></li></ul>";
+    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-type" + "'><li class='list-group-item panel-item'><span class='badge'>" + "type" + "</span>" + types + "," + termObject['typ']['value'] + "</li></ul>";
+    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-identifier" + "'><li class='list-group-item panel-item'><span class='badge'>" + "identifier" + "</span>" + termObject['identifier']['value'] + "</li></ul>";
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-update" + "'><li class='list-group-item panel-item'><span class='badge'>" + "last update" + "</span>" + termObject['lastupdate']['value'] + "</li></ul>";
     // add project metadata
     objectdataDetailsDiv += '<h3>Project Data</h3>';
