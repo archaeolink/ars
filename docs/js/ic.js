@@ -2,7 +2,7 @@ let ic = (termObject) => {
 
     // object
     searchResultsDiv += "<div class='box-resultlist-eighty' id='" + termObject['item']['value'] + "'>";
-    searchResultsDiv += "<h1 style='text-align:center;padding-bottom:10px;'> " + termObject['label']['value'] + "</h1>";
+    searchResultsDiv += "<h1 style='text-align:center;padding-bottom:10px;'>Object: " + termObject['label']['value'].replace("@en", "") + "</h1>";
 
     // add map / image
     searchResultsDiv += "<div id='map-poi' style='display: flex;justify-content: center;align-items: center;'>";
@@ -11,11 +11,11 @@ let ic = (termObject) => {
 
     // add Object Data
     searchResultsDiv += '<div id="object_details"></div>';
-    objectdataDetailsDiv += '<br><h3><center><img src="al_circle_icon.png" height="80">&nbsp;&nbsp;&nbsp;<img src="losm_circle_icon.png" height="80"></center></h3>';
+    objectdataDetailsDiv += '<br><h3><center><img src="al_circle_icon.png" height="80"></center></h3>';
     objectdataDetailsDiv += '<h3>Metadata</h3>';
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-uuid" + "'><li class='list-group-item panel-item'><span class='badge'>" + "URI / permalink" + "</span>" + termObject['item']['value'].replace("samian:", "http://data.archaeology.link/data/samian/") + "</li></ul>";
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-label" + "'><li class='list-group-item panel-item'><span class='badge'>" + "label" + "</span>" + termObject['label']['value'] + "</li></ul>";
-    let str_origin = "African Red Slip Ware digital Project (ARS3D)";
+    let str_origin = "African Red Slip Ware digital (ARS3D)";
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-origin" + "'><li class='list-group-item panel-item'><span class='badge'>" + "origin" + "</span>" + str_origin + "</li></ul>";
     let types = termObject['types']['value'].replaceAll("http://archaeology.link/ontology#", "lado:")
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-type" + "'><li class='list-group-item panel-item'><span class='badge'>" + "type" + "</span>" + types + "</li></ul>";
@@ -23,23 +23,20 @@ let ic = (termObject) => {
     objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "object-update" + "'><li class='list-group-item panel-item'><span class='badge'>" + "last update" + "</span>" + termObject['lastupdate']['value'] + "</li></ul>";
     // add project metadata
     objectdataDetailsDiv += '<h3>Project Data</h3>';
-    let name = "Linked Open ARS, originally " + str_origin;
-    let name_wd = "https://www.wikidata.org/entity/xxx";
-    let funding = "RGZM, originally BMBF";
-    let funding_wd = "xxx";
-    funding_wd = funding_wd.replace("/wiki/", "/entity/");
-    let appl1 = "RGZM, i3mainz";
-    let appl1_wd = "xxx";
-    appl1_wd = appl1_wd.replace("/wiki/", "/entity/");
-    let start = "2018";
-    let end = "2021";
-    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "project-1" + "'><li class='list-group-item panel-item'><span class='badge'>" + "name" + "</span>" + "<a href='" + name_wd + "' target='_blank'>" + name + "</a>" +
+    let name1 = "Linked Open ARS";
+    let name2 = "(" + str_origin + ")";
+    let name_link1 = "https://github.com/RGZM/ars-lod";
+    let name_link2 = "https://ars3d.rgzm.de/";
+    let funding = "RGZM, Bundesministerium für Bildung und Forschung (BMBF)";
+    let contact = "Department of Scientific IT, RGZM, Mainz (Dr. Allard Mees, Florian Thiery M.Sc.)";
+    let date = "01/02/18 – 31/05/21";
+    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "project-1" + "'><li class='list-group-item panel-item'><span class='badge'>" + "project" + "</span>" + "<a href='" + name_link1 + "' target='_blank'>" + name1 + "</a>" +
+        " <a href='" + name_link2 + "' target='_blank'>" + name2 + "</a>" + "</li></ul>";
+    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "project-2" + "'><li class='list-group-item panel-item'><span class='badge'>" + "funding" + "</span>" + "" + funding +
+        "" + "</li></ul>";
+    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "project-3" + "'><li class='list-group-item panel-item'><span class='badge'>" + "contact" + "</span>" + "" + contact + "" +
         "</li></ul>";
-    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "project-2" + "'><li class='list-group-item panel-item'><span class='badge'>" + "funding" + "</span>" + "<a href='" + funding_wd + "' target='_blank'>" + funding +
-        "</a>" + "</li></ul>";
-    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "project-3" + "'><li class='list-group-item panel-item'><span class='badge'>" + "applicant" + "</span>" + "<a href='" + appl1_wd + "' target='_blank'>" + appl1 + "</a>" +
-        "</li></ul>";
-    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "project-4" + "'><li class='list-group-item panel-item'><span class='badge'>" + "duration" + "</span>" + "<i>" + start + " - " + end + "</i>" + "</li></ul>";
+    objectdataDetailsDiv += "<ul class='list-group panel-item2' id='" + "project-4" + "'><li class='list-group-item panel-item'><span class='badge'>" + "duration" + "</span>" + "<i>" + date + "</i>" + "</li></ul>";
     objectdataDetailsDiv += '</div>';
 
     // add object metadata
